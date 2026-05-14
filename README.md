@@ -1,3 +1,3 @@
 ## Projeto de Criação Aletaória de NPCs de RPG
 
-Esse projeto tem o intuíto de auxíliar no estudo da linguagem Java e a solucionar um problema vigente que exige muito trabalho manual, que é a criação de Non-player Characters (NPCs) para jogos de  Role Playing Gaming (RPG) utilizando o livro `Guia do Mestre` do Sistema de `RPG D&D 5e`.
+O objetivo deste projeto é aprimorar o aprendizado em Java através da automação da criação de Non-Player Characters (NPCs) para o sistema de RPG `D&D 5e`. O software utiliza as regras do `Guia do Mestre` para otimizar uma tarefa que, manualmente, demanda muito tempo com a verificação de 8 tabelas descritivas.
