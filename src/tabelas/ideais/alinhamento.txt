@@ -1,0 +1,9 @@
+Leal Bom
+Leal Neutro
+Leal Mau
+Neutro Bom
+Neutro
+Neutro Mau
+Caótico Bom
+Caótico Neutro
+Caótico Mau
