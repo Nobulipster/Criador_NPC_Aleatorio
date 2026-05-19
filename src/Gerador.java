@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Gerador {
@@ -26,19 +27,46 @@ public class Gerador {
             return null;
         }
 
+        Random rand = new Random();
+
         String aparencia = new Tabela(dadosAparencia).rolar();
         String origem = new Tabela(dadosOrigem).rolar();
-        String habAlta = new Tabela(dadosHabAlta).rolar();
-        String habBaixa = new Tabela(dadosHabBaixa).rolar();
+
+        // MELHORIA 2: Garantir que Habilidade Alta e Baixa não sejam o mesmo atributo
+        Tabela tabelaAlta = new Tabela(dadosHabAlta);
+        Tabela tabelaBaixa = new Tabela(dadosHabBaixa);
+        int idxAlta = rand.nextInt(tabelaAlta.getTamanho());
+        int idxBaixa = rand.nextInt(tabelaBaixa.getTamanho());
+        while (idxAlta == idxBaixa) {
+            idxBaixa = rand.nextInt(tabelaBaixa.getTamanho());
+        }
+        String habAlta = tabelaAlta.obterItem(idxAlta);
+        String habBaixa = tabelaBaixa.obterItem(idxBaixa);
+
         String dom = new Tabela(dadosDom).rolar();
         String maneirismo = new Tabela(dadosManeirismo).rolar();
         String tracos = new Tabela(dadosTracos).rolar();
-        String vinculo = new Tabela(dadosVinculos).rolar();
         String segredo = new Tabela(dadosSegredos).rolar();
+
+        // MELHORIA 1: Tratar a Tabela de Vínculo (Tratar a linha 10 / índice 9)
+        Tabela tabelaVinculos = new Tabela(dadosVinculos);
+        String vinculo;
+        int idxVinculo = rand.nextInt(tabelaVinculos.getTamanho());
+        
+        if (idxVinculo == 9) {
+            int v1 = rand.nextInt(9);
+            int v2 = rand.nextInt(9);
+            while (v1 == v2) {
+                v2 = rand.nextInt(9);
+            }
+            vinculo = "Duplo Vínculo: [" + tabelaVinculos.obterItem(v1) + "] E [" + tabelaVinculos.obterItem(v2) + "]";
+        } else {
+            vinculo = tabelaVinculos.obterItem(idxVinculo);
+        }
 
         String alinhamentoSorteado = new Tabela(dadosAlinhamento).rolar();
         List<String> tabelasElegiveis = new ArrayList<>();
-        tabelasElegiveis.add("/tabelas/ideais/outrosIdeais.txt"); 
+        tabelasElegiveis.add("/tabelas/ideais/outrosIdeais.txt");
 
         if (alinhamentoSorteado.contains("Leal")) tabelasElegiveis.add("/tabelas/ideais/idealLeal.txt");
         if (alinhamentoSorteado.contains("Caótico")) tabelasElegiveis.add("/tabelas/ideais/idealCaotico.txt");

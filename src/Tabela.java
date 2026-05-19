@@ -14,4 +14,12 @@ public class Tabela {
         int indiceAleatorio = gerador.nextInt(opcoes.size());
         return opcoes.get(indiceAleatorio);
     }
+
+    public int getTamanho() {
+        return opcoes.size();
+    }
+
+    public String obterItem(int indice) {
+        return opcoes.get(indice);
+    }
 }
